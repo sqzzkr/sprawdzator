@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>body{
+	padding-top: 60px;
+} </style>
+</head>
+<body class="bg-dark text-white">
+	<div class="container">
+		<h2 class="text-center">Sprawdź kod PPE i PPG</h2>
+		<br>
+		<div class="input-group input-group-lg">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Wprowadź kod:</span>
+			</div>
+			<input id="mask" type="text" onkeyup="count()" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-sm"
+			 maxlength="40">
+			<div class="input-group-append">
+				<span class="input-group-text" id="counter"></span>
+			</div>
+		</div>
+	<br>
+	<div class="text-center">
+	<button type="button" id="Enea" onclick="enea()" class="btn btn-primary">ENEA</button>
+	<button type="button" id="Innogy" onclick="innogy()" class="btn btn-info">Innogy</button>
+	<button type="button" id="Energa" onclick="energa()" class="btn btn-success">Energa</button>
+<div class="btn-group">
+	<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		Tauron
+	</button>
+	<div class="dropdown-menu">
+		<a class="dropdown-item" onclick="enea()" href="#">Enion</a>
+		<a class="dropdown-item" href="#">EnergiaPro</a>
+		<a class="dropdown-item" onclick="tauronGZE()" href="#">GZE</a>
+	</div>
+</div>
+<div class="btn-group">
+	<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		PGE
+	</button>
+	<div class="dropdown-menu">
+		<a class="dropdown-item" onclick="pgeBIALYSTOK()" href="#">Białystok</a>
+		<a class="dropdown-item" href="#">Lublin</a>
+		<a class="dropdown-item" onclick="pgeLODZMIASTO()" href="#">Łódź Miasto</a>
+		<a class="dropdown-item" onclick="pgeLODZTEREN()" href="#">Łódź Teren</a>
+		<a class="dropdown-item" href="#">Rzeszów</a>
+		<a class="dropdown-item" onclick="pgeSKARZYSKO()" href="#">Skarżysko Kamienna</a>
+		<a class="dropdown-item" href="#">Warszawa</a>
+		<a class="dropdown-item" href="#">Zamość</a>
+	</div>
+</div>
+<div class="btn-group">
+	<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		PSG
+	</button>
+	<div class="dropdown-menu">
+		<a class="dropdown-item" onclick="enea()" href="#">Warszawa</a>
+		<a class="dropdown-item" onclick="enea()" href="#">Wrocław</a>
+		<a class="dropdown-item" onclick="enea()" href="#">Poznań</a>
+		<a class="dropdown-item" onclick="psgZABRZE()" href="#">Zabrze</a>
+		<a class="dropdown-item" onclick="enea()" href="#">Tarnów</a>
+	</div>
+</div>
+	<div id="output"><span id="counter"></span></div>
+	</div>
+	</div>
+</body>
+<script>
+	output = document.getElementById("output");
+	characters = document.getElementById("characters");
+	timer = null;
+		
+	function copytoclipboard() {
+		document.getElementById("mask").select();
+		document.execCommand("copy");
+	}
+
+	function wpiszkod() {
+		output.style.color = "red";
+		output.innerHTML = "Wpisz kod.";
+	}
+
+	function ok() {
+		output.style.color = "green";
+		output.innerHTML = "<p>OK.</p><p>Kod skopiowany do schowka.</p>";
+	}
+
+	function toolong() {
+		output.style.color = "red";
+		output.innerHTML = `Numer za długi, liczba znaków ${maskvalue.length}, wymagana ${max}.`;
+	}
+	function tooshort() {
+		output.style.color = "red";
+		output.innerHTML = `Numer za krótki, liczba znaków ${maskvalue.length}, wymagana ${max}.`;
+	}
+
+	function error() {
+		output.style.color = "red";
+		output.innerHTML = "Błędny kod.";
+	}
+
+	function onlynumbers() {
+		output.style.color = "red";
+		output.innerHTML = "Numer nie może zawierać liter.";
+	}
+	function timercleaner(){
+		output.innerHTML = "";
+		document.getElementById("mask").value = "";
+		counter.innerHTML = "";
+	}
+	function cancelcleaner(){
+			if (timer) {
+			clearTimeout(timer); //cancel the previous timer.
+			timer = null;
+			}
+	}
+
+	function count() {
+		cancelcleaner()
+		characters = document.getElementById("mask").value.length;
+		counter = document.getElementById("counter");
+		counter.style.color = "black";
+		counter.innerHTML = `${characters}`;
+		}
+
+function check(maskupper, max, code, codelength) {
+	cancelcleaner()
+	if (maskupper == "") {
+		wpiszkod();
+	}
+	else if (maskupper.length == max && maskupper.substring(0, codelength) == code && !isNaN(maskupper.substring(codelength, max))) {
+		ok();
+		document.getElementById("mask").value = maskupper;
+		copytoclipboard();
+	}
+	else {
+		if (isNaN(maskupper.substring(codelength, max))) {
+			onlynumbers();
+		}
+		if (maskupper.substring(0, codelength) != code) {
+			error();
+		}
+		if (maskupper.length < max) {
+			tooshort();
+		}
+		if (maskupper.length > max) {
+			toolong();
+		}
+	}
+	timer = setTimeout(timercleaner, 25000);
+}
+function enea(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 32;
+	code = "PLENED0000059";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function innogy(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 33;
+	code = "PL000001";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function energa(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 18;
+	code = "PL0037";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function tauronGZE(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 32;
+	code = "PLGZEO";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function pgeBIALYSTOK(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 21;
+	code = "PL_ZEB";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function pgeLODZMIASTO(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 18;
+	code = "PLLZED";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function pgeLODZTEREN(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 18;
+	code = "PLZELD";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function pgeSKARZYSKO(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 21;
+	code = "PL_ZEOD";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+function psgZABRZE(){
+	maskvalue = document.getElementById("mask").value;
+	maskvalue = maskvalue.replace(/\s/g, '');
+	maskupper = maskvalue.toUpperCase();
+	max = 12;
+	code = "PL003";
+	codelength = code.length;
+	check(maskupper, max, code, codelength);
+}
+</script>
+</html>
