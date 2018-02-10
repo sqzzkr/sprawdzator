@@ -78,6 +78,7 @@
 	timer = null;
 		
 	function copytoclipboard() {
+		document.getElementById("mask").value = maskupper;
 		document.getElementById("mask").select();
 		document.execCommand("copy");
 	}
@@ -117,7 +118,7 @@
 	}
 	function cancelcleaner(){
 			if (timer) {
-			clearTimeout(timer); //cancel the previous timer.
+			clearTimeout(timer);
 			timer = null;
 			}
 	}
@@ -129,6 +130,12 @@
 		counter.style.color = "black";
 		counter.innerHTML = `${characters}`;
 		}
+	
+	function mask(){
+		maskvalue = document.getElementById("mask").value;
+		maskvalue = maskvalue.replace(/\s/g, '');
+		maskupper = maskvalue.toUpperCase();
+	}
 
 function check(maskupper, max, code, codelength) {
 	cancelcleaner()
@@ -137,7 +144,6 @@ function check(maskupper, max, code, codelength) {
 	}
 	else if (maskupper.length == max && maskupper.substring(0, codelength) == code && !isNaN(maskupper.substring(codelength, max))) {
 		ok();
-		document.getElementById("mask").value = maskupper;
 		copytoclipboard();
 	}
 	else {
@@ -157,81 +163,63 @@ function check(maskupper, max, code, codelength) {
 	timer = setTimeout(timercleaner, 25000);
 }
 function enea(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 32;
 	code = "PLENED0000059";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function innogy(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 33;
 	code = "PL000001";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function energa(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 18;
 	code = "PL0037";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function tauronGZE(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 32;
 	code = "PLGZEO";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function pgeBIALYSTOK(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 21;
 	code = "PL_ZEB";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function pgeLODZMIASTO(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 18;
 	code = "PLLZED";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function pgeLODZTEREN(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 18;
 	code = "PLZELD";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function pgeSKARZYSKO(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 21;
 	code = "PL_ZEOD";
 	codelength = code.length;
 	check(maskupper, max, code, codelength);
 }
 function psgZABRZE(){
-	maskvalue = document.getElementById("mask").value;
-	maskvalue = maskvalue.replace(/\s/g, '');
-	maskupper = maskvalue.toUpperCase();
+	mask();
 	max = 12;
 	code = "PL003";
 	codelength = code.length;
