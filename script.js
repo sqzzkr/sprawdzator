@@ -2,6 +2,8 @@ output = document.getElementById("output");
 info = document.getElementById("info");
 characters = document.getElementById("characters");
 timer = null;
+digit = null;
+i = null;
 
 function copytoclipboard() {
     document.getElementById("mask").value = maskupper;
@@ -18,10 +20,16 @@ function ok() {
 }
 function toolong() {
     output.style.color = "red";
+    if (max[i]) {
+        max = max[i];
+    }
     output.innerHTML = `Numer za długi, liczba znaków ${maskvalue.length}, wymagana ${max}.`;
 }
 function tooshort() {
     output.style.color = "red";
+    if (max[i]) {
+        max = max[i];
+    }
     output.innerHTML = `Numer za krótki, liczba znaków ${maskvalue.length}, wymagana ${max}.`;
 }
 function error() {
@@ -57,12 +65,30 @@ function mask() {
     maskupper = maskvalue.toUpperCase();
 }
 
+function mask_more(){ 
+    maskvalue = document.getElementById("mask").value;
+    maskvalue = maskvalue.replace(/\s/g, '');
+    maskupper = maskvalue.toUpperCase();
+    digit = maskupper.match(/\d/);
+    if (digit) {
+        usercode = maskupper.substring(0, digit.index);
+        i = code.indexOf(usercode);
+    }
+}
+
+function conditions(maskupper, max, code, codelength) {
+    if ((maskupper.length == max && maskupper.substring(0, codelength) == code && !isNaN(maskupper.substring(codelength, max)))
+        || (maskupper.length == max && code.indexOf(maskupper.substring(0, codelength)) > -1 && !isNaN(maskupper.substring(0, max))))
+    { return true }
+    else { return false }
+}
+
 function check(maskupper, max, code, codelength) {
     cancelcleaner();
     if (maskupper == "") {
         entercode();
     }
-    else if (maskupper.length == max && maskupper.substring(0, codelength) == code && !isNaN(maskupper.substring(codelength, max))) {
+    else if (conditions(maskupper, max, code, codelength)) {
         ok();
         copytoclipboard();
     }
@@ -82,128 +108,170 @@ function check(maskupper, max, code, codelength) {
     }
     timer = setTimeout(timercleaner, 25000);
 }
-function check_numbers(maskvalue, max, code, codelength) {
+
+function conditions_more(i, maskupper, max, code, codelength) {
+    if (maskupper.length == max[i] && code.indexOf(maskupper.substring(0, codelength[i])) > -1 && !isNaN(maskupper.substring(codelength[i], max[i]))) {
+        return true;
+    }
+    else { return false}
+}
+function check_more(i, maskupper, max, code, codelength) { 
     cancelcleaner();
-    if (maskvalue == "") {
+    if (maskupper == "") {
         entercode();
     }
-    else if (maskvalue.length == max && code.indexOf(maskvalue.substring(0, codelength)) > -1 && !isNaN(maskvalue.substring(0, max))) {
+    else if (conditions_more(i, maskupper, max, code, codelength)) {
         ok();
         copytoclipboard();
     }
     else {
-        if (isNaN(maskvalue.substring(0, max))) {
+        if (isNaN(maskupper.substring(codelength[i], max[i]))) {
             onlynumbers();
         }
-        if (maskvalue.substring(0, codelength) != code) {
+        if (maskupper.substring(0, codelength[i]) != code[i]) {
             error();
         }
-        if (maskvalue.length < max) {
+        if (maskupper.length < max[i]) {
             tooshort();
         }
-        if (maskvalue.length > max) {
+        if (maskupper.length > max[i]) {
             toolong();
         }
     }
     timer = setTimeout(timercleaner, 25000);
 }
+function tauronENION() {
+    max = [18, 15];
+    code = ["PLTAUD", "ENID_"];
+    codelength = [code[0].length, code[1].length];
+    mask_more();
+    check_more(i, maskupper, max, code, codelength);
+}
+function tauronENERGIAPRO() {
+    max = [18, 17];
+    code = ["PLTAUD", "PROD_"];
+    codelength = [code[0].length, code[1].length];
+    mask_more();
+    check_more(i, maskupper, max, code, codelength);
+}
+function pgeLUBLIN() {
+    max = [21, 21];
+    code = ["PL_LUB", "PL_PGEL"];
+    codelength = [code[0].length, code[1].length];
+    mask_more();
+    check_more(i, maskupper, max, code, codelength);
+}
+function pgeWARSZAWA() {
+    max = [21, 21];
+    code = ["PL_ZEWD", "PL_PGEW"];
+    codelength = [code[0].length, code[1].length];
+    mask_more();
+    check_more(i, maskupper, max, code, codelength);
+}
+function pgeZAMOSC() {
+    max = [18, 20, 21];
+    code = ["PLZKED", "PL_ZK", "PL_ZKE"];
+    codelength = [code[0].length, code[1].length, code[2].length];
+    mask_more();
+    check_more(i, maskupper, max, code, codelength);
+}
 function enea() {
-    mask();
     max = 32;
     code = "PLENED0000059";
     codelength = code.length;
+    mask(); 
     check(maskupper, max, code, codelength);
 }
 function innogy() {
-    mask();
     max = 33;
     code = "PL000001";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function energa() {
-    mask();
     max = 18;
     code = "PL0037";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function tauronGZE() {
-    mask();
     max = 32;
     code = "PLGZEO";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function pgeBIALYSTOK() {
-    mask();
     max = 21;
     code = "PL_ZEB";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function pgeLODZMIASTO() {
-    mask();
     max = 18;
     code = "PLLZED";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function pgeLODZTEREN() {
-    mask();
     max = 18;
     code = "PLZELD";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function pgeRZESZOW() {
-    mask();
     max = 18;
     code = ["480548"];
     codelength = code[0].length;
-    check_numbers(maskvalue, max, code, codelength);
+    mask();
+    check(maskupper, max, code, codelength);
 }
 function pgeSKARZYSKO() {
-    mask();
     max = 21;
     code = "PL_ZEOD";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
 function psWARSZAWA() {
     info.innerHTML = "PSG Warszawa: 10 cyfr.";
-    mask();
     max = 10;
     code = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     codelength = code[0].length;
-    check_numbers(maskvalue, max, code, codelength);
+    mask();
+    check(maskupper, max, code, codelength);
 }
 function psgWROCLAW() {
     info.innerHTML = "PSG Wrocław: 10 cyfr, pierwsza 5, 6 lub 9.";
-    mask();
     max = 10;
     code = ["5", "6", "9"];
     codelength = code[0].length;
-    check_numbers(maskvalue, max, code, codelength);
+    mask();
+    check(maskupper, max, code, codelength);
 }
 function psgPOZNAN() {
-    mask();
     max = 10;
     code = ["12", "13", "14", "35"];
     codelength = code[0].length;
-    check_numbers(maskvalue, max, code, codelength);
+    mask();
+    check(maskupper, max, code, codelength);
 }
 function psgTARNOW() {
-    mask();
     max = 9;
     code = ["00"];
     codelength = code[0].length;
-    check_numbers(maskvalue, max, code, codelength);
+    mask();
+    check(maskupper, max, code, codelength);
 }
 function psgZABRZE() {
-    mask();
     max = 12;
     code = "PL003";
     codelength = code.length;
+    mask();
     check(maskupper, max, code, codelength);
 }
