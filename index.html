@@ -3,6 +3,8 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name="author" content="Andrzej Grzeszczyk, Wojciech Gauze">
+<title>Kody PPE i PPG</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -33,11 +35,11 @@
 		</div>
 	<br>
 		<div class="text-center">
-			<button type="button" id="Enea" onclick="enea()" class="btn btn-primary">ENEA</button>
-			<button type="button" id="Innogy" onclick="innogy()" class="btn btn-info">Innogy</button>
-			<button type="button" id="Energa" onclick="energa()" class="btn btn-success">Energa</button>
+			<button type="button" id="Enea" onclick="enea()" class="btn btn-primary btn-lg">ENEA</button>
+			<button type="button" id="Innogy" onclick="innogy()" class="btn btn-info btn-lg">Innogy</button>
+			<button type="button" id="Energa" onclick="energa()" class="btn btn-success btn-lg">Energa</button>
 			<div class="btn-group">
-				<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tauron</button>
+				<button type="button" class="btn btn-danger dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tauron</button>
 				<div class="dropdown-menu">
 				<a class="dropdown-item" onclick="enea()" href="#">Enion</a>
 				<a class="dropdown-item" href="#">EnergiaPro</a>
@@ -45,7 +47,7 @@
 				</div>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PGE</button>
+				<button type="button" class="btn btn-warning dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PGE</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" onclick="pgeBIALYSTOK()" href="#">Białystok</a>
 					<a class="dropdown-item" href="#">Lublin</a>
@@ -58,7 +60,7 @@
 				</div>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PSG</button>
+				<button type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PSG</button>
 				<div class="dropdown-menu">
 					<a class="dropdown-item" onclick="psWARSZAWA()" href="#">Warszawa</a>
 					<a class="dropdown-item" onclick="psgWROCLAW()" href="#">Wrocław</a>
@@ -67,8 +69,8 @@
 					<a class="dropdown-item" onclick="psgTARNOW()" href="#">Tarnów</a>
 				</div>
 			</div>
-			<div id="output">
-			</div>
+			<div id="output"></div>
+			<div id="info"></div>
 		</div>
 	</div>
 	<script src="script.js"></script>
