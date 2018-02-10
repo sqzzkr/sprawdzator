@@ -1,4 +1,5 @@
 output = document.getElementById("output");
+info = document.getElementById("info");
 characters = document.getElementById("characters");
 timer = null;
 
@@ -32,6 +33,7 @@ function onlynumbers() {
     output.innerHTML = "Numer nie może zawierać liter.";
 }
 function timercleaner() {
+    info.innerHTML = "";
     output.innerHTML = "";
     document.getElementById("mask").value = "";
     counter.innerHTML = "";
@@ -169,6 +171,7 @@ function pgeSKARZYSKO() {
     check(maskupper, max, code, codelength);
 }
 function psWARSZAWA() {
+    info.innerHTML = "PSG Warszawa: 10 cyfr.";
     mask();
     max = 10;
     code = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -176,6 +179,7 @@ function psWARSZAWA() {
     check_numbers(maskvalue, max, code, codelength);
 }
 function psgWROCLAW() {
+    info.innerHTML = "PSG Wrocław: 10 cyfr, pierwsza 5, 6 lub 9.";
     mask();
     max = 10;
     code = ["5", "6", "9"];
@@ -185,7 +189,7 @@ function psgWROCLAW() {
 function psgPOZNAN() {
     mask();
     max = 10;
-    code = ["12", "13", "14", "35"]
+    code = ["12", "13", "14", "35"];
     codelength = code[0].length;
     check_numbers(maskvalue, max, code, codelength);
 }
