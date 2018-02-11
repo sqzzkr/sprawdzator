@@ -23,7 +23,9 @@
 	<div class="container">
 		<h2 class="text-center"><a id="link" href="index.html">Sprawdź kod PPE i PPG</a></h2>
 	<br>
-		<div class="input-group input-group-lg">
+	<div class="row">
+		<div class="col-lg-1"></div>
+		<div class="input-group input-group-lg col-lg-10">
 			<div class="input-group-prepend">
 				<span class="input-group-text">Wprowadź kod:</span>
 			</div>
@@ -33,9 +35,11 @@
 				<span class="input-group-text" id="counter"></span>
 			</div>
 		</div>
+		<div class="col-lg-1"></div>
+	</div>
 	<br>
 		<div class="text-center">
-			<button type="button" id="Enea" onclick="enea()" class="btn btn-primary btn-lg">ENEA</button>
+			<button type="button" id="Enea" onclick="enea()" class="btn btn-primary btn-lg">Enea</button>
 			<button type="button" id="Innogy" onclick="innogy()" class="btn btn-info btn-lg">Innogy</button>
 			<button type="button" id="Energa" onclick="energa()" class="btn btn-success btn-lg">Energa</button>
 			<div class="btn-group">
@@ -62,7 +66,7 @@
 			<div class="btn-group">
 				<button type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PSG</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" onclick="psWARSZAWA()" href="#">Warszawa</a>
+					<a class="dropdown-item" onclick="psgWARSZAWA()" href="#">Warszawa</a>
 					<a class="dropdown-item" onclick="psgWROCLAW()" href="#">Wrocław</a>
 					<a class="dropdown-item" onclick="psgPOZNAN()" href="#">Poznań</a>
 					<a class="dropdown-item" onclick="psgZABRZE()" href="#">Zabrze</a>
@@ -70,7 +74,18 @@
 				</div>
 			</div>
 			<div id="output"></div>
-			<div id="info"></div>
+			<div>
+				<div class="row">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4 text-info" id="infoup"></div>
+					<div class="col-lg-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4"id="infodown"></div>
+					<div class="col-lg-4"></div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="script.js"></script>
