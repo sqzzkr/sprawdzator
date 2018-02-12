@@ -1,314 +1,93 @@
-output = document.getElementById("output");
-info = document.getElementById("info");
-characters = document.getElementById("characters");
-timer = null;
-digit = null;
-i = null;
-
-function copytoclipboard() {
-    document.getElementById("mask").value = maskupper;
-    document.getElementById("mask").select();
-    document.execCommand("copy");
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name="author" content="Andrzej Grzeszczyk, Wojciech Gauze">
+<title>Kody PPE i PPG</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>body{
+	padding-top: 60px;
 }
-function entercode() {
-    output.style.color = "red";
-    output.innerHTML = "Wpisz kod.";
+#link{
+	color: white;
+	text-decoration: none;
 }
-function ok() {
-    output.style.color = "green";
-    output.innerHTML = "OK.<br>Kod skopiowany do schowka.";
-}
-function toolong() {
-    output.style.color = "red";
-    if (max[i]) {
-        max = max[i];
-    }
-    output.innerHTML = `Numer za długi.<br>Liczba znaków ${maskvalue.length}, wymagana ${max}.`;
-}
-function tooshort() {
-    output.style.color = "red";
-    if (max[i]) {
-        max = max[i];
-    }
-    output.innerHTML = `Numer za krótki.<br>Liczba znaków ${maskvalue.length}, wymagana ${max}.`;
-}
-function error() {
-    output.style.color = "red";
-    output.innerHTML = "Błędna stała wartość początku kodu.";
-}
-function onlynumbers() {
-    output.style.color = "red";
-    output.innerHTML = "Numer nie może zawierać liter.";
-}
-function timercleaner() {
-    infoup.innerHTML = "";
-    infodown.innerHTML = "";
-    output.innerHTML = "";
-    document.getElementById("mask").value = "";
-    counter.innerHTML = "";
-}
-function cancelcleaner() {
-    if (timer) {
-        clearTimeout(timer);
-        timer = null;
-    }
-}
-function count() {
-    cancelcleaner()
-    characters = document.getElementById("mask").value.length;
-    counter = document.getElementById("counter");
-    counter.style.color = "black";
-    counter.innerHTML = `${characters}`;
-}
-function mask() {
-    maskvalue = document.getElementById("mask").value;
-    maskvalue = maskvalue.replace(/\s/g, '');
-    maskupper = maskvalue.toUpperCase();
-}
-
-function mask_more(){ 
-    maskvalue = document.getElementById("mask").value;
-    maskvalue = maskvalue.replace(/\s/g, '');
-    maskupper = maskvalue.toUpperCase();
-    digit = maskupper.match(/\d/);
-    if (digit) {
-        usercode = maskupper.substring(0, digit.index);
-        i = code.indexOf(usercode);
-    }
-}
-
-function conditions(maskupper, max, code, codelength) {
-    if ((maskupper.length == max && maskupper.substring(0, codelength) == code && !isNaN(maskupper.substring(codelength, max)))
-        || (maskupper.length == max && code.indexOf(maskupper.substring(0, codelength)) > -1 && !isNaN(maskupper.substring(0, max))))
-    { return true }
-    else { return false }
-}
-
-function check(maskupper, max, code, codelength) {
-    cancelcleaner();
-    if (maskupper == "") {
-        entercode();
-    }
-    else if (conditions(maskupper, max, code, codelength)) {
-        ok();
-        copytoclipboard();
-    }
-    else {
-        if (isNaN(maskupper.substring(codelength, max))) {
-            onlynumbers();
-        }
-        if (maskupper.substring(0, codelength) != code) {
-            error();
-        }
-        if (maskupper.length < max) {
-            tooshort();
-        }
-        if (maskupper.length > max) {
-            toolong();
-        }
-    }
-    timer = setTimeout(timercleaner, 25000);
-}
-
-function conditions_more(i, maskupper, max, code, codelength) {
-    if (maskupper.length == max[i] && code.indexOf(maskupper.substring(0, codelength[i])) > -1 && !isNaN(maskupper.substring(codelength[i], max[i]))) {
-        return true;
-    }
-    else { return false}
-}
-function check_more(i, maskupper, max, code, codelength) { 
-    cancelcleaner();
-    if (maskupper == "") {
-        entercode();
-    }
-    else if (conditions_more(i, maskupper, max, code, codelength)) {
-        ok();
-        copytoclipboard();
-    }
-    else {
-        if (isNaN(maskupper.substring(codelength[i], max[i]))) {
-            onlynumbers();
-        }
-        if (maskupper.substring(0, codelength[i]) != code[i]) {
-            error();
-        }
-        if (maskupper.length < max[i]) {
-            tooshort();
-        }
-        if (maskupper.length > max[i]) {
-            toolong();
-        }
-    }
-    timer = setTimeout(timercleaner, 25000);
-}
-function enea() {
-    infoup.innerHTML = "<b>Enea</b>";
-    infodown.innerHTML = "<b>32</b> znaki.<br>Na początku <b>PLENED0000059</b>.";
-    max = 32;
-    code = "PLENED0000059";
-    codelength = code.length;
-    mask(); 
-    check(maskupper, max, code, codelength);
-}
-function innogy() {
-    infoup.innerHTML = "<b>Innogy</b>";
-    infodown.innerHTML = "<b>33</b> znaki.<br>Na początku <b>PL000001</b>.";
-    max = 33;
-    code = "PL000001";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function energa() {
-    infoup.innerHTML = "<b>Energa</b>";
-    infodown.innerHTML = "<b>18</b> znaków.<br>Na początku <b>PL0037</b>.";
-    max = 18;
-    code = "PL0037";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function tauronENION() {
-    infoup.innerHTML = "<b>Tauron ENION</b>";
-    infodown.innerHTML = "Początek <b>PLTAUD</b> - <b>18</b> znaków.<br>Początek <b>ENID_</b> - <b>15</b> znaków.";
-    max = [18, 15];
-    code = ["PLTAUD", "ENID_"];
-    codelength = [code[0].length, code[1].length];
-    mask_more();
-    check_more(i, maskupper, max, code, codelength);
-}
-function tauronENERGIAPRO() {
-    infoup.innerHTML = "<b>Tauron ENERGIA PRO</b>";
-    infodown.innerHTML = "Początek <b>PLTAUD</b> - <b>18</b> znaków.<br>Początek <b>PROD_</b> - <b>17</b> znaków.";
-    max = [18, 17];
-    code = ["PLTAUD", "PROD_"];
-    codelength = [code[0].length, code[1].length];
-    mask_more();
-    check_more(i, maskupper, max, code, codelength);
-}
-function tauronGZE() {
-    infoup.innerHTML = "<b>Tauron GZE</b>";
-    infodown.innerHTML = "<b>32</b> znaki.<br>Na początku <b>PLGZEO</b>.";
-    max = 32;
-    code = "PLGZEO";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function pgeBIALYSTOK() {
-    infoup.innerHTML = "<b>PGE Białystok</b>";
-    infodown.innerHTML = "<b>21</b> znaków.<br>Na początku <b>PL_ZEB</b>.";
-    max = 21;
-    code = "PL_ZEB";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function pgeLUBLIN() {
-    infoup.innerHTML = "<b>PGE Lublin</b>";
-    infodown.innerHTML = "<b>21</b> znaków.<br>Na początku <b>PL_LUB</b> albo <b>PL_PGEL</b>.";
-    max = [21, 21];
-    code = ["PL_LUB", "PL_PGEL"];
-    codelength = [code[0].length, code[1].length];
-    mask_more();
-    check_more(i, maskupper, max, code, codelength);
-}
-function pgeLODZMIASTO() {
-    infoup.innerHTML = "<b>PGE Łódź Miasto</b>";
-    infodown.innerHTML = "<b>18</b> znaków.<br>Na początku <b>PLLZED</b>.";
-    max = 18;
-    code = "PLLZED";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function pgeLODZTEREN() {
-    infoup.innerHTML = "<b>PGE Łódź Teren</b>";
-    infodown.innerHTML = "<b>18</b> znaków.<br>Na początku <b>PLZELD</b>.";
-    max = 18;
-    code = "PLZELD";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function pgeRZESZOW() {
-    infoup.innerHTML = "<b>PGE Rzeszów</b>";
-    infodown.innerHTML = "<b>18</b> cyfr.<br>Na początku <b>480548</b>.";
-    max = 18;
-    code = ["480548"];
-    codelength = code[0].length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function pgeSKARZYSKO() {
-    infoup.innerHTML = "<b>PGE Skarżysko-Kamienna</b>";
-    infodown.innerHTML = "<b>21</b> znaków.<br>Na początku <b>PL_ZEOD</b>.";
-    max = 21;
-    code = "PL_ZEOD";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function pgeWARSZAWA() {
-    infoup.innerHTML = "<b>PGE Warszawa</b>";
-    infodown.innerHTML = "<b>21</b> znaków.<br>Na początku <b>PL_ZEWD</b> albo <b>PL_PGEW</b>.";
-    max = [21, 21];
-    code = ["PL_ZEWD", "PL_PGEW"];
-    codelength = [code[0].length, code[1].length];
-    mask_more();
-    check_more(i, maskupper, max, code, codelength);
-}
-function pgeZAMOSC() {
-    infoup.innerHTML = "<b>PGE Zamość<b>";
-    infodown.innerHTML = "Początek <b>PLZKED</b> - <b>18</b> znaków.<br>Początek <b>PL_ZK</b> - <b>20</b> znaków.<br>Początek <b>PL_ZKE</b> - <b>21</b> znaków.";
-    max = [18, 20, 21];
-    code = ["PLZKED", "PL_ZK", "PL_ZKE"];
-    codelength = [code[0].length, code[1].length, code[2].length];
-    mask_more();
-    check_more(i, maskupper, max, code, codelength);
-}
-function psgWARSZAWA() {
-    infoup.innerHTML = "<b>PSG Warszawa<b>";
-    infodown.innerHTML = "<b>10</b> cyfr.";
-    max = 10;
-    code = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-    codelength = code[0].length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function psgWROCLAW() {
-    infoup.innerHTML = "<b>PSG Wrocław</b>";
-    infodown.innerHTML = "<b>10</b> cyfr.<br>Pierwsza <b>5</b>, <b>6</b> lub <b>9</b>.";
-    max = 10;
-    code = ["5", "6", "9"];
-    codelength = code[0].length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function psgPOZNAN() {
-    infoup.innerHTML = "<b>PSG Poznań</b>";
-    infodown.innerHTML = "<b>10</b> cyfr.<br>Na początku <b>12</b>, <b>13</b>, <b>14</b>, <b>35</b>.";
-    max = 10;
-    code = ["12", "13", "14", "35"];
-    codelength = code[0].length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function psgTARNOW() {
-    infoup.innerHTML = "<b>PSG Tarnów</b>";
-    infodown.innerHTML = "<b>9</b> cyfr.<br>Na początku <b>00</b>.";
-    max = 9;
-    code = ["00"];
-    codelength = code[0].length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
-function psgZABRZE() {
-    infoup.innerHTML = "<b>PSG Zabrze</b>";
-    infodown.innerHTML = "<b>12</b> znaków.<br>Na początku <b>PL003</b>";
-    max = 12;
-    code = "PL003";
-    codelength = code.length;
-    mask();
-    check(maskupper, max, code, codelength);
-}
+</style>
+</head>
+<body class="bg-dark text-white">
+	<div class="container">
+		<h2 class="text-center"><a id="link" href="index.html">Sprawdź kod PPE i PPG</a></h2>
+	<br>
+	<div class="row">
+		<div class="col-lg-1"></div>
+		<div class="input-group input-group-lg col-lg-10">
+			<div class="input-group-prepend">
+				<span class="input-group-text">Wprowadź kod:</span>
+			</div>
+			<input id="mask" type="text" onkeyup="count()" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-sm"
+			 maxlength="40">
+			<div class="input-group-append">
+				<span class="input-group-text" id="counter"></span>
+			</div>
+		</div>
+		<div class="col-lg-1"></div>
+	</div>
+	<br>
+		<div class="text-center">
+			<button type="button" id="Enea" onclick="enea()" class="btn btn-primary btn-lg">Enea</button>
+			<button type="button" id="Innogy" onclick="innogy()" class="btn btn-info btn-lg">Innogy</button>
+			<button type="button" id="Energa" onclick="energa()" class="btn btn-success btn-lg">Energa</button>
+			<div class="btn-group">
+				<button type="button" class="btn btn-danger dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tauron</button>
+				<div class="dropdown-menu">
+				<a class="dropdown-item" onclick="tauronENION()" href="#">Enion</a>
+				<a class="dropdown-item" onclick="tauronENERGIAPRO()" href="#">EnergiaPro</a>
+				<a class="dropdown-item" onclick="tauronGZE()" href="#">GZE</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-warning dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PGE</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" onclick="pgeBIALYSTOK()" href="#">Białystok</a>
+					<a class="dropdown-item" onclick="pgeLUBLIN()" href="#">Lublin</a>
+					<a class="dropdown-item" onclick="pgeLODZMIASTO()" href="#">Łódź Miasto</a>
+					<a class="dropdown-item" onclick="pgeLODZTEREN()" href="#">Łódź Teren</a>
+					<a class="dropdown-item" onclick="pgeRZESZOW()" href="#">Rzeszów</a>
+					<a class="dropdown-item" onclick="pgeSKARZYSKO()" href="#">Skarżysko Kamienna</a>
+					<a class="dropdown-item" onclick="pgeWARSZAWA()" href="#">Warszawa</a>
+					<a class="dropdown-item" onclick="pgeZAMOSC()" href="#">Zamość</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-secondary dropdown-toggle btn-lg" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">PSG</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" onclick="psgWARSZAWA()" href="#">Warszawa</a>
+					<a class="dropdown-item" onclick="psgWROCLAW()" href="#">Wrocław</a>
+					<a class="dropdown-item" onclick="psgPOZNAN()" href="#">Poznań</a>
+					<a class="dropdown-item" onclick="psgZABRZE()" href="#">Zabrze</a>
+					<a class="dropdown-item" onclick="psgTARNOW()" href="#">Tarnów</a>
+				</div>
+			</div>
+			<div><h4 id="output"></h4></div>
+			<div>
+				<div class="row">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4 text-info"><h4 id="infoup"></h4></div>
+					<div class="col-lg-4"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4"></div>
+					<div class="col-lg-4"id="infodown"></div>
+					<div class="col-lg-4"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>
