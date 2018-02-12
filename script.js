@@ -56,7 +56,9 @@ function cancelcleaner() {
 }
 function count() {
     cancelcleaner()
-    characters = document.getElementById("mask").value.length;
+    characters = document.getElementById("mask").value;
+    characters = characters.replace(/\s/g, '');
+    characters = characters.length;
     counter = document.getElementById("counter");
     counter.innerHTML = `${characters}`;
 }
@@ -65,7 +67,6 @@ function mask() {
     maskvalue = maskvalue.replace(/\s/g, '');
     maskupper = maskvalue.toUpperCase();
 }
-
 function mask_more(){ 
     maskvalue = document.getElementById("mask").value;
     maskvalue = maskvalue.replace(/\s/g, '');
