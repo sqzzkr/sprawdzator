@@ -4,12 +4,12 @@ characters = document.getElementById("characters");
 timer = null;
 digit = null;
 i = null;
-
 function copytoclipboard() {
     document.getElementById("mask").value = maskupper;
     document.getElementById("mask").select();
     document.execCommand("copy");
     window.getSelection().removeAllRanges();
+    count();
 }
 function entercode() {
     output.style.color = "red";
@@ -58,7 +58,6 @@ function count() {
     cancelcleaner()
     characters = document.getElementById("mask").value.length;
     counter = document.getElementById("counter");
-    counter.style.color = "black";
     counter.innerHTML = `${characters}`;
 }
 function mask() {
@@ -77,14 +76,12 @@ function mask_more(){
         i = code.indexOf(usercode);
     }
 }
-
 function conditions(maskupper, max, code, codelength) {
     if ((maskupper.length == max && maskupper.substring(0, codelength) == code && !isNaN(maskupper.substring(codelength, max)))
         || (maskupper.length == max && code.indexOf(maskupper.substring(0, codelength)) > -1 && !isNaN(maskupper.substring(0, max))))
     { return true }
     else { return false }
 }
-
 function check(maskupper, max, code, codelength) {
     cancelcleaner();
     if (maskupper == "") {
@@ -110,7 +107,6 @@ function check(maskupper, max, code, codelength) {
     }
     timer = setTimeout(timercleaner, 25000);
 }
-
 function conditions_more(i, maskupper, max, code, codelength) {
     if (maskupper.length == max[i] && code.indexOf(maskupper.substring(0, codelength[i])) > -1 && !isNaN(maskupper.substring(codelength[i], max[i]))) {
         return true;
