@@ -9,6 +9,7 @@ function copytoclipboard() {
     document.getElementById("mask").value = maskupper;
     document.getElementById("mask").select();
     document.execCommand("copy");
+    window.getSelection().removeAllRanges();
 }
 function entercode() {
     output.style.color = "red";
