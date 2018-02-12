@@ -287,7 +287,7 @@ function psgWROCLAW() {
 }
 function psgPOZNAN() {
     infoup.innerHTML = "<b>PSG Poznań</b>";
-    infodown.innerHTML = "<b>10</b> cyfr.<br>Na początku <b>12</b>, <b>13</b>, <b>14</b>, <b>35</b>.";
+    infodown.innerHTML = "<b>10</b> cyfr.<br>Na początku <b>12</b>, <b>13</b>, <b>14</b> lub <b>35</b>.";
     max = 10;
     code = ["12", "13", "14", "35"];
     codelength = code[0].length;
