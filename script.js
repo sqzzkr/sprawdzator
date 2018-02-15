@@ -172,7 +172,7 @@ function energa() {
     mask();
     if (maskupper.substring(0, 2) == "48") {
         maskupper = maskupper.replace("48", "PL");
-        infoENERGA = "Początek kodu zamieniony na poprawny.";
+        infoENERGA = "<br><span style='color:darkorange'>Początek kodu zamieniony na poprawny.</span>";
 }
     check(maskupper, max, code, codelength);
 }
