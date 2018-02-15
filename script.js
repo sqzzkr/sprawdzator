@@ -16,8 +16,13 @@ function entercode() {
     output.innerHTML = "Wpisz kod.";
 }
 function ok() {
+    if (infoENERGA) {
+    output.style.color = "green";
+    output.innerHTML = "OK. "+ infoENERGA +"<br>Kod skopiowany do schowka.";
+    } else {
     output.style.color = "green";
     output.innerHTML = "OK.<br>Kod skopiowany do schowka.";
+}
 }
 function toolong() {
     output.style.color = "red";
@@ -163,7 +168,12 @@ function energa() {
     max = 18;
     code = "PL0037";
     codelength = code.length;
+    infoENERGA = "";
     mask();
+    if (maskupper.substring(0, 2) == "48") {
+        maskupper = maskupper.replace("48", "PL");
+        infoENERGA = "Początek kodu zamieniony na poprawny.";
+}
     check(maskupper, max, code, codelength);
 }
 function tauronENION() {
