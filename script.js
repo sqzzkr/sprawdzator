@@ -4,6 +4,7 @@ characters = document.getElementById("characters");
 timer = null;
 digit = null;
 i = null;
+infoENERGA = null;
 function copytoclipboard() {
     document.getElementById("mask").value = maskupper;
     document.getElementById("mask").select();
@@ -168,7 +169,6 @@ function energa() {
     max = 18;
     code = "PL0037";
     codelength = code.length;
-    infoENERGA = "";
     mask();
     if (maskupper.substring(0, 2) == "48") {
         maskupper = maskupper.replace("48", "PL");
