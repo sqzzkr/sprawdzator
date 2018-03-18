@@ -36,7 +36,7 @@ function tooshort() {
     output.style.color = "red";
     if (max.length == 1) {
         output.innerHTML = `Numer za krótki.<br>Liczba znaków ${maskvalue.length}, wymagana ${max[i]}.`;
-    } else { output.innerHTML = `Numer za długi.<br>Liczba znaków ${maskvalue.length}, wymagane conajmniej ${max[0]}.`; }
+    } else { output.innerHTML = `Numer za krótki.<br>Liczba znaków ${maskvalue.length}, wymagane conajmniej ${max[0]}.`; }
 }
 function error() {
     output.style.color = "red";
