@@ -92,7 +92,7 @@ function check() {
                 toolong();
             }
         } 
-        else if (maskupper.match(code[i] == null)) {
+        else if (maskupper.match(code[i]) == null) {
             error();
             break;
         }
