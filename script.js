@@ -262,9 +262,13 @@ function psgPOZNAN() {
     numbers = ['[\\d]{8}', '[\\d]{8}', '[\\d]{8}', '[\\d]{8}']
     mask();
     if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
-        wrongcontent();
+        if (maskvalue == "") {
+            entercode();
+        } else {
+            wrongcontent();
+        }
     }
-}
+}    
 function psgTARNOW() {
     infoup.innerHTML = "<b>PSG Tarnów</b>";
     infodown.innerHTML = "<b>9</b> cyfr.<br>Na początku <b>00</b>.";
@@ -274,9 +278,13 @@ function psgTARNOW() {
     numbers = ['[\\d]{7}'];
     mask();
     if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
-        wrongcontent();
+        if (maskvalue == "") {
+            entercode();
+        } else {
+            wrongcontent();
+        }
     }
-}
+}    
 function psgWARSZAWA() {
     infoup.innerHTML = "<b>PSG Warszawa<b>";
     infodown.innerHTML = "<b>10</b> cyfr.";
@@ -286,9 +294,13 @@ function psgWARSZAWA() {
     numbers = ['[\\d]{9}']
     mask();
     if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
-        wrongcontent();
+        if (maskvalue == "") {
+            entercode();
+        } else {
+            wrongcontent();
+        }
     }
-}
+}    
 function psgWROCLAW() {
     infoup.innerHTML = "<b>PSG Wrocław</b>";
     infodown.innerHTML = "<b>10</b> cyfr.<br>Pierwsza <b>5</b>, <b>6</b> lub <b>9</b>.";
@@ -297,10 +309,14 @@ function psgWROCLAW() {
     codelength = [1, 1, 1];
     numbers = ['[\\d]{9}'];
     mask();
-    if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
-        wrongcontent();
+    if (maskupper != "" && maskupper != null && !isNaN(maskupper)) { check(); } else {
+        if (maskvalue == "") {
+            entercode();
+        } else {
+            wrongcontent();
+        }
     }
-}
+}    
 function psgZABRZE() {
     infoup.innerHTML = "<b>PSG Zabrze</b>";
     infodown.innerHTML = "<b>12</b> znaków.<br>Na początku <b>PL003</b>";
