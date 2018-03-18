@@ -118,7 +118,7 @@ function enea() {
     numbers = ['[\\d]{19}'];
     codelength = [13];
     mask();
-    if (maskupper != null) { check(); };
+    if (maskupper != "" && maskupper != null ) { check(); };
 }
 function innogy() {
     infoup.innerHTML = "<b>Innogy</b>";
@@ -128,7 +128,7 @@ function innogy() {
     numbers = ['[\\d]{25}']
     codelength = [8];
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function energa() {
     infoup.innerHTML = "<b>Energa</b>";
@@ -138,11 +138,11 @@ function energa() {
     codelength = [6];
     numbers = ['[\\d]{12}']
     mask();
-    if (maskupper != null && maskupper.substring(0, 2) == "48") {
+    if (maskupper != "" && maskupper != null  && maskupper.substring(0, 2) == "48") {
         maskupper = maskupper.replace("48", "PL");
         infoENERGA = "<br><span style='color:darkorange'>Początek kodu zamieniony na poprawny.</span>";
     }
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function tauronENERGIAPRO() {
     infoup.innerHTML = "<b>Tauron ENERGIA PRO</b>";
@@ -152,7 +152,7 @@ function tauronENERGIAPRO() {
     codelength = [5, 6];
     numbers = ['[\\d]{12}', '[\\d]{12}']
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function tauronENION() {
     infoup.innerHTML = "<b>Tauron ENION</b>";
@@ -162,7 +162,7 @@ function tauronENION() {
     codelength = [5, 6];
     numbers = ['[\\d]{10}','[\\d]{12}']
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function tauronGZE() {
     infoup.innerHTML = "<b>Tauron GZE</b>";
@@ -172,7 +172,7 @@ function tauronGZE() {
     codelength = [6];
     numbers = ["[\\d]{26}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeBIALYSTOK() {
     infoup.innerHTML = "<b>PGE Białystok</b>";
@@ -182,7 +182,7 @@ function pgeBIALYSTOK() {
     codelength = [6];
     numbers = ["[\\d]{15}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeLODZMIASTO() {
     infoup.innerHTML = "<b>PGE Łódź Miasto</b>";
@@ -192,7 +192,7 @@ function pgeLODZMIASTO() {
     codelength = [6];
     numbers = ["[\\d]{12}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeLODZTEREN() {
     infoup.innerHTML = "<b>PGE Łódź Teren</b>";
@@ -202,7 +202,7 @@ function pgeLODZTEREN() {
     codelength = [6];
     numbers = ["[\\d]{12}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeLUBLIN() {
     infoup.innerHTML = "<b>PGE Lublin</b>";
@@ -212,7 +212,7 @@ function pgeLUBLIN() {
     codelength = [6, 7];
     numbers = ["[\\d]{15}", "[\\d]{14}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeRZESZOW() {
     infoup.innerHTML = "<b>PGE Rzeszów</b>";
@@ -222,7 +222,7 @@ function pgeRZESZOW() {
     codelength = [6];
     numbers = ["[\\d]{12}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeSKARZYSKO() {
     infoup.innerHTML = "<b>PGE Skarżysko-Kamienna</b>";
@@ -232,7 +232,7 @@ function pgeSKARZYSKO() {
     codelength = [7];
     numbers = ["[\\d]{14}"]
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeWARSZAWA() {
     infoup.innerHTML = "<b>PGE Warszawa</b>";
@@ -242,7 +242,7 @@ function pgeWARSZAWA() {
     codelength = [8,8];
     numbers = ['[\\d]{10}["_"][\\d]{2}', '[\\d]{10}["_"][\\d]{2}'];
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function pgeZAMOSC() {
     infoup.innerHTML = "<b>PGE Zamość<b>";
@@ -251,7 +251,7 @@ function pgeZAMOSC() {
     code = ['["PLZKED"]{6}', '["PL_ZK"]{5}', '["PL_ZKE"]{6}'];
     codelength = [6, 5, 6];
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
 function psgPOZNAN() {
     infoup.innerHTML = "<b>PSG Poznań</b>";
@@ -261,7 +261,7 @@ function psgPOZNAN() {
     codelength = [2, 2, 2, 2]
     numbers = ['[\\d]{8}', '[\\d]{8}', '[\\d]{8}', '[\\d]{8}']
     mask();
-    if (maskupper != null && !isNaN(maskupper)) { check(); } else {
+    if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
         wrongcontent();
     }
 }
@@ -273,7 +273,7 @@ function psgTARNOW() {
     codelength = [2];
     numbers = ['[\\d]{7}'];
     mask();
-    if (maskupper != null && !isNaN(maskupper)) { check(); } else {
+    if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
         wrongcontent();
     }
 }
@@ -285,7 +285,7 @@ function psgWARSZAWA() {
     codelength = [1];
     numbers = ['[\\d]{9}']
     mask();
-    if (maskupper != null && !isNaN(maskupper)) { check(); } else {
+    if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
         wrongcontent();
     }
 }
@@ -297,7 +297,7 @@ function psgWROCLAW() {
     codelength = [1, 1, 1];
     numbers = ['[\\d]{9}'];
     mask();
-    if (maskupper != null && !isNaN(maskupper)) { check(); } else {
+    if (maskupper != "" && maskupper != null  && !isNaN(maskupper)) { check(); } else {
         wrongcontent();
     }
 }
@@ -309,5 +309,5 @@ function psgZABRZE() {
     codelength = [5]
     numbers = ['[\\d]{7}'];
     mask();
-    if (maskupper != null) { check(); }
+    if (maskupper != "" && maskupper != null ) { check(); }
 }
