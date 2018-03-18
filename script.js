@@ -92,6 +92,10 @@ function check() {
                 toolong();
             }
         } 
+        else if (maskupper.match(code[i] == null)) {
+            error();
+            break;
+        }
         else if (maskupper.match(code[i]).index == 0 && maskupper.length == max[i]) {
             usercode = maskupper.substring(codelength[i], max[i]);
             if (usercode.match(numbers[i]) == null) {
@@ -104,9 +108,6 @@ function check() {
                 break;
             }
         } 
-        else if (!(maskupper.match(code[i]) || (maskupper.match(code[i]).index != 0))) {
-            error();
-        }
     }
         timer = setTimeout(timercleaner, 25000);
 }    
