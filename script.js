@@ -226,11 +226,11 @@ function pgeRZESZOW() {
 }
 function pgeSKARZYSKO() {
     infoup.innerHTML = "<b>PGE Skarżysko-Kamienna</b>";
-    infodown.innerHTML = "<b>21</b> znaków.<br>Na początku <b>PL_ZEOD</b>.";
-    max = 21;
-    code = ['["PL_ZEOD"]{7}'];
-    codelength = [7];
-    numbers = ["[\\d]{14}"]
+    infodown.innerHTML = "<b>21</b> znaków.<br>Na początku <b>PL_ZEOD_</b>.";
+    max = [21];
+    code = ['["PL_ZEOD_"]{8}'];
+    codelength = [8];
+    numbers = ['[\\d]{10}["_"][\\d]{2}']
     mask();
     if (maskupper != "" && maskupper != null ) { check(); }
 }
