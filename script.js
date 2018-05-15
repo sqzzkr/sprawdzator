@@ -94,7 +94,6 @@ function check() {
         } 
         else if (maskupper.match(code[i]) == null) {
             error();
-            break;
         }
         else if (maskupper.match(code[i]).index == 0 && maskupper.length == max[i]) {
             usercode = maskupper.substring(codelength[i], max[i]);
